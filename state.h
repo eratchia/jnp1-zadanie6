@@ -12,13 +12,12 @@ public:
 };
 
 class state {
+public:
     coordinate_t get_x();
     coordinate_t get_y();
     Direction get_dir();
-    void add_x(coordinate_t);
-    void add_y(coordinate_t);
-    void turn_left();
-    void turn_right();
+    void move_forward(coordinate_t);
+    void turn_right(coordinate_t);
     void set_dir(Direction);
     void set_x(Direction);
     void set_y(Direction);

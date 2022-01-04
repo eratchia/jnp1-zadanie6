@@ -19,27 +19,32 @@ public:
 };
 
 class compose: public recipie {
+public:
     compose(std::initializer_list<recipie>);
     instruction* begin();
     instruction* end();
 };
 
 class move_forward: public instruction {
+public:
     move_forward();
-    state next_state(state);
+    state next_state(const state&);
 };
 
 class move_backward: public instruction {
+public:
     move_backward();
     state next_state(state);
 };
 
 class rotate_left: public instruction {
+public:
     rotate_left();
     state next_state(state);
 };
 
 class rotate_right: public instruction {
+public:
     rotate_right();
     state next_state(state);
 };
