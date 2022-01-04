@@ -19,6 +19,8 @@ public:
 };
 
 class compose: public recipie {
+private:
+    std::vector<instruction> instructions;
 public:
     compose(std::initializer_list<recipie>);
     instruction* begin();
@@ -34,17 +36,17 @@ public:
 class move_backward: public instruction {
 public:
     move_backward();
-    state next_state(state);
+    state next_state(const state&);
 };
 
 class rotate_left: public instruction {
 public:
     rotate_left();
-    state next_state(state);
+    state next_state(const state&);
 };
 
 class rotate_right: public instruction {
 public:
     rotate_right();
-    state next_state(state);
+    state next_state(const state&);
 };
