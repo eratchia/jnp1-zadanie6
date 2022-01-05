@@ -3,28 +3,30 @@
 #include <initializer_list>
 #include "state.h"
 
-class recipie;
-
-class instruction: public recipie {
+class executable {
 public:
-    virtual state next_state(state);
-    instruction* begin();
-    instruction* end();
+    virtual state next_state(const state&);
 };
 
 class recipie {
 public:
-    virtual instruction* begin();
-    virtual instruction* end();
+    virtual executable* begin();
+    virtual executable* end();
+};
+
+class instruction: public executable, public recipie {
+public:
+    instruction* begin();
+    instruction* end();
 };
 
 class compose: public recipie {
 private:
-    std::vector<instruction> instructions;
+    std::vector<executable> instructions;
 public:
     compose(std::initializer_list<recipie>);
-    instruction* begin();
-    instruction* end();
+    executable* begin();
+    executable* end();
 };
 
 class move_forward: public instruction {

@@ -13,16 +13,14 @@ instruction* instruction::end() {
 
 // compose
 compose::compose(initializer_list<recipie> recipies) {
-    for (auto recipie: recipies) {
-        for (instruction& instr: recipie) {
+    for (auto recipie: recipies)
+        for (auto& instr: recipie)
             instructions.push_back(instr);
-        }
-    }
 }
-instruction* compose::begin() {
+executable* compose::begin() {
     return &(*instructions.begin());
 }
-instruction* compose::end() {
+executable* compose::end() {
     return &(*instructions.end());
 }
 
