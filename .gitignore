@@ -1,3 +1,7 @@
 /CMakeLists.txt
 /cmake-build-debug/
 /.idea/
+*.dia~
+*.o
+*.pdf
+testy-zad6
