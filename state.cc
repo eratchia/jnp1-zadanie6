@@ -9,9 +9,9 @@ void add(coordinate_t& a, coordinate_t& b) {
 state::state(std::pair<coordinate_t, coordinate_t> point, Direction _dir): 
     x(point.first), y(point.second), dir(_dir) {}
 
-coordinate_t state::get_x() {return x;}
-coordinate_t state::get_y() {return y;}
-Direction state::get_dir() {return dir;}
+coordinate_t state::get_x() const {return x;}
+coordinate_t state::get_y() const {return y;}
+Direction state::get_dir() const {return dir;}
 
 void state::set_x(coordinate_t _x) {x = _x;}
 void state::set_y(coordinate_t _y) {y = _y;}
