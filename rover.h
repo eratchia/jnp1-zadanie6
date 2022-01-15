@@ -17,12 +17,12 @@ class RoverDidNotLandYetException : public std::exception {
 class Rover {
 private:
     std::vector<std::unique_ptr<Sensor>> sensors;
-    std::unordered_map<char, const recipe_t &> recipes;
+    std::unordered_map<char, const recipe_t> recipes;
     State state;
     bool landed, stopped;
     friend class RoverBuilder;
     Rover(std::vector<std::unique_ptr<Sensor>> &&sensors,
-          std::unordered_map<char, const recipe_t &> &&recipes)
+          std::unordered_map<char, const recipe_t> &&recipes)
           : sensors(std::move(sensors)), recipes(std::move(recipes)),
             state({0, 0}, Direction()), landed(false), stopped(false) {}
 public:
@@ -33,10 +33,10 @@ public:
 
 class RoverBuilder {
 private:
-    std::unordered_map<char, const recipe_t &> recipes;
+    std::unordered_map<char, const recipe_t> recipes;
     std::vector<std::unique_ptr<Sensor>> sensors;
 public:
-    RoverBuilder &program_command(char, const recipe_t &);
+    RoverBuilder &program_command(char, const recipe_t);
     RoverBuilder &add_sensor(std::unique_ptr<Sensor>);
     Rover build();
 };

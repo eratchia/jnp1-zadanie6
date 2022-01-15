@@ -21,9 +21,9 @@ void State::move_forward(coordinate_t dist) {
     if (dir > Direction::EAST)
         dist = -dist;
     if (dir == Direction::NORTH || dir == Direction::SOUTH)
-        add(x, dist);
-    else 
         add(y, dist);
+    else 
+        add(x, dist);
 }
 void State::turn_right() {
     switch (dir){
