@@ -11,32 +11,34 @@ public:
     virtual State next_state(const State&) const = 0;
 };
 
-std::list<std::shared_ptr<Instruction>> compose(std::initializer_list<std::list<std::shared_ptr<Instruction>>> init);
+using recipe_t = std::list<std::shared_ptr<Instruction>>;
+
+recipe_t compose(std::initializer_list<recipe_t> init);
 
 class MoveForward: public Instruction {
 public:
     MoveForward();
     State next_state(const State&) const override;
 };
-std::list<std::shared_ptr<MoveForward>> move_forward();
+recipe_t move_forward();
 
 class MoveBackward: public Instruction {
 public:
     MoveBackward();
     State next_state(const State&) const override;
 };
-std::list<std::shared_ptr<MoveBackward>> move_backward();
+recipe_t move_backward();
 
 class RotateLeft: public Instruction {
 public:
     RotateLeft();
     State next_state(const State&) const override;
 };
-std::list<std::shared_ptr<RotateLeft>> rotate_left();
+recipe_t rotate_left();
 
 class RotateRight: public Instruction {
 public:
     RotateRight();
     State next_state(const State&) const override;
 };
-std::list<std::shared_ptr<RotateRight>> rotate_right();
+recipe_t rotate_right();

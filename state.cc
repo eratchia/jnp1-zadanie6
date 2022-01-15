@@ -11,11 +11,6 @@ State::State(std::pair<coordinate_t, coordinate_t> point, Direction _dir):
 
 coordinate_t State::get_x() const {return x;}
 coordinate_t State::get_y() const {return y;}
-Direction State::get_dir() const {return dir;}
-
-void State::set_x(coordinate_t _x) {x = _x;}
-void State::set_y(coordinate_t _y) {y = _y;}
-void State::set_dir(Direction _dir) {dir = _dir;}
 
 void State::move_forward(coordinate_t dist) {
     if (dir > Direction::EAST)
@@ -60,5 +55,5 @@ void State::turn_left() {
 }
 
 std::ostream& operator<<(std::ostream& str, const State& state) {
-    return str << "(" << state.x << " " << state.y << ") " << state.dir;
+    return str << "(" << state.x << ", " << state.y << ") " << state.dir;
 }
