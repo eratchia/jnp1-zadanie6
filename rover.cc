@@ -25,16 +25,14 @@ void Rover::execute(const std::string &commands) {
     if (!landed)
         throw RoverDidNotLandYetException();
     stopped = true;
-    if (isInDanger())
-        return;
     for (char command: commands) {
         auto it = recipes.find(command);
         if (it == recipes.end())
             return;
         for (auto &exec: it->second) {
-            state = exec->next_state(state);
             if (isInDanger())
                 return;
+            state = exec->next_state(state);
         }
     }
     stopped = false;
