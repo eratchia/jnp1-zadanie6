@@ -1,7 +1,7 @@
 #include "rover.h"
 
 RoverBuilder &RoverBuilder::program_command(char name, const recipe_t &rec) {
-    recipes.insert({name, rec});
+    recipes[name] = rec;
     return *this;
 }
 
@@ -41,6 +41,7 @@ void Rover::execute(const std::string &commands) {
 }
 
 void Rover::land(std::pair<coordinate_t, coordinate_t> coords, Direction dir) {
+    stopped = false;
     landed = true;
     state = State(coords, dir);
 }
