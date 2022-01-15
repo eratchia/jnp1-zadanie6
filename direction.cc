@@ -1,12 +1,14 @@
-#pragma once
+module;
 
 #include <iostream>
 
-enum class Direction {
+export module Direction;
+
+export enum class Direction {
     NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3
 };
 
-inline std::ostream &operator<<(std::ostream &os, const Direction &d) {
+export inline std::ostream &operator<<(std::ostream &os, const Direction &d) {
     switch (d) {
         case Direction::NORTH:
             return os << "NORTH";

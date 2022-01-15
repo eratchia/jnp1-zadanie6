@@ -1,7 +1,8 @@
 #include <cassert>
 #include <iostream>
 #include <memory>
-#include "rover.h"
+
+import rover;
 
 struct TrueSensor : public Sensor {
     bool is_safe([[maybe_unused]] coordinate_t x,

@@ -1,66 +1,88 @@
-#include "Instruction.h"
+module;
+
+#include <initializer_list>
+#include <vector>
+#include <list>
+#include <memory>
+import State;
+
+export module Instruction;
 
 using std::initializer_list;
 using std::unique_ptr;
 using std::make_unique;
 using std::make_shared;
 
-// compose
-recipe_t compose(std::initializer_list<recipe_t> recipe) {
+export class Instruction {
+public:
+    virtual State next_state(const State &) const = 0;
+};
+
+export using recipe_t = std::list<std::shared_ptr<Instruction>>;
+
+export recipe_t compose(std::initializer_list<recipe_t> recipe) {
     recipe_t res = {};
     for (auto instructions: recipe)
         res.splice(res.end(), instructions);
     return res;
 }
 
-// MoveForward
-MoveForward::MoveForward() = default;
+export class MoveForward : public Instruction {
+public:
+    MoveForward() = default;
 
-State MoveForward::next_state(const State &original) const {
-    State next = original;
-    next.move_forward(1);
-    return next;
-}
+    State next_state(const State &original) const override {
+        State next = original;
+        next.move_forward(1);
+        return next;
+    }
+};
 
-recipe_t move_forward() {
+export recipe_t move_forward() {
     return {make_shared<MoveForward>()};
 }
 
-// MoveBackward
-MoveBackward::MoveBackward() = default;
+export class MoveBackward : public Instruction {
+public:
+    MoveBackward() = default;
 
-State MoveBackward::next_state(const State &original) const {
-    State next = original;
-    next.move_forward(-1);
-    return next;
-}
+    State next_state(const State &original) const override {
+        State next = original;
+        next.move_forward(-1);
+        return next;
+    }
+};
 
-recipe_t move_backward() {
+export recipe_t move_backward() {
     return {make_shared<MoveBackward>()};
 }
 
-// RotateLeft
-RotateLeft::RotateLeft() = default;
+export class RotateLeft : public Instruction {
+public:
+    RotateLeft() = default;
 
-State RotateLeft::next_state(const State &original) const {
-    State next = original;
-    next.turn_left();
-    return next;
-}
+    State next_state(const State &original) const override {
+        State next = original;
+        next.turn_left();
+        return next;
+    }
+};
 
-recipe_t rotate_left() {
+export recipe_t rotate_left() {
     return {make_shared<RotateLeft>()};
 }
 
-// RotateRight
-RotateRight::RotateRight() = default;
+export class RotateRight : public Instruction {
+public:
+    RotateRight() = default;
 
-State RotateRight::next_state(const State &original) const {
-    State next = original;
-    next.turn_right();
-    return next;
-}
+    State next_state(const State &original) const override {
+        State next = original;
+        next.turn_right();
+        return next;
+    }
+};
 
-recipe_t rotate_right() {
+export recipe_t rotate_right() {
     return {make_shared<RotateRight>()};
 }
