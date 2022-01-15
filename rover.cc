@@ -1,6 +1,6 @@
 #include "rover.h"
 
-RoverBuilder &RoverBuilder::program_command(char name, const recipe_t rec) {
+RoverBuilder &RoverBuilder::program_command(char name, const recipe_t &rec) {
     recipes.insert({name, rec});
     return *this;
 }
@@ -15,7 +15,7 @@ Rover RoverBuilder::build() {
 }
 
 bool Rover::isInDanger() {
-    for (auto &sens : sensors)
+    for (auto &sens: sensors)
         if (!sens->is_safe(state.get_x(), state.get_y()))
             return true;
     return false;
@@ -27,11 +27,11 @@ void Rover::execute(const std::string &commands) {
     stopped = true;
     if (isInDanger())
         return;
-    for (char command : commands) {
+    for (char command: commands) {
         auto it = recipes.find(command);
         if (it == recipes.end())
             return;
-        for (auto &exec : it->second) {
+        for (auto &exec: it->second) {
             state = exec->next_state(state);
             if (isInDanger())
                 return;

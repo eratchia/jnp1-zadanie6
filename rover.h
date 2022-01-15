@@ -37,7 +37,7 @@ private:
     std::unordered_map<char, const recipe_t> recipes;
     std::vector<std::unique_ptr<Sensor>> sensors;
 public:
-    RoverBuilder &program_command(char, const recipe_t);
+    RoverBuilder &program_command(char, const recipe_t &);
     RoverBuilder &add_sensor(std::unique_ptr<Sensor>);
     Rover build();
 };
