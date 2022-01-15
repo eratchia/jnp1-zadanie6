@@ -8,9 +8,14 @@
 
 class Instruction {
 public:
+    // Funkcja next_state przyjmuje stan i mówi, jak się on zmieni
+    // po wykonaniu danej instrukcji
     virtual State next_state(const State &) const = 0;
 };
 
+// Typ recipe_t jest typem wykonywalnej przez łazik komendy. Dla każdej
+// instrukcji istnieje funkcja, która zwraca recipe_t odpowiadające
+// tej instrukcji.
 using recipe_t = std::list<std::shared_ptr<Instruction>>;
 
 recipe_t compose(std::initializer_list<recipe_t> init);

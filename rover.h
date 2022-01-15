@@ -25,7 +25,6 @@ private:
           std::unordered_map<char, recipe_t> &&recipes)
           : sensors(std::move(sensors)), recipes(std::move(recipes)),
             state({0, 0}, Direction()), landed(false), stopped(false) {}
-    bool isInDanger();
 public:
     void execute(const std::string &);
     void land(std::pair<coordinate_t, coordinate_t>, Direction);

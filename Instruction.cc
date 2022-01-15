@@ -6,6 +6,7 @@ using std::make_unique;
 using std::make_shared;
 
 // compose
+// Spłaszczamy listę list przez sklejenie ze sobą jej elementów
 recipe_t compose(std::initializer_list<recipe_t> recipe) {
     recipe_t res = {};
     for (auto instructions: recipe)
@@ -16,12 +17,16 @@ recipe_t compose(std::initializer_list<recipe_t> recipe) {
 // MoveForward
 MoveForward::MoveForward() = default;
 
+// Metoda next_state w każdej podklasie Instruction wykonuje odpowiadającą
+// metodę w klasie State.
 State MoveForward::next_state(const State &original) const {
     State next = original;
     next.move_forward(1);
     return next;
 }
 
+// Funkcje tworzące obiekty typu recipe_t z pojedynczych instrukcji sprowadzają
+// się do stworzenia jednoelementowej listy wskaźnika na tęż instrukcję.
 recipe_t move_forward() {
     return {make_shared<MoveForward>()};
 }
