@@ -9,7 +9,7 @@
 
 class executable {
 public:
-    virtual state next_state(const state&) = 0;
+    virtual state next_state(const state&) const = 0;
 };
 
 class recipie {
@@ -73,23 +73,23 @@ public:
 class move_forward: public instruction {
 public:
     move_forward();
-    state next_state(const state&) override;
+    state next_state(const state&) const override;
 };
 
 class move_backward: public instruction {
 public:
     move_backward();
-    state next_state(const state&);
+    state next_state(const state&) const override;
 };
 
 class rotate_left: public instruction {
 public:
     rotate_left();
-    state next_state(const state&);
+    state next_state(const state&) const override;
 };
 
 class rotate_right: public instruction {
 public:
     rotate_right();
-    state next_state(const state&);
+    state next_state(const state&) const override;
 };

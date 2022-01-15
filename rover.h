@@ -19,12 +19,12 @@ private:
     std::vector<std::unique_ptr<Sensor>> sensors;
     std::unordered_map<char, const recipie &> recipies;
     state s;
-    bool landed;
+    bool landed, stopped;
     friend class RoverBuilder;
     Rover(std::vector<std::unique_ptr<Sensor>> &&sensors,
           std::unordered_map<char, const recipie &> &&recipies)
           : sensors(std::move(sensors)), recipies(std::move(recipies)),
-            s({0, 0}, Direction()), landed(false) {}
+            s({0, 0}, Direction()), landed(false), stopped(false) {}
 public:
     void execute(const std::string &);
     void land(std::pair<coordinate_t, coordinate_t>, Direction);
