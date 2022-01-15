@@ -6,18 +6,18 @@ void add(coordinate_t& a, coordinate_t& b) {
     a += b;    
 }
 
-state::state(std::pair<coordinate_t, coordinate_t> point, Direction _dir): 
+State::State(std::pair<coordinate_t, coordinate_t> point, Direction _dir): 
     x(point.first), y(point.second), dir(_dir) {}
 
-coordinate_t state::get_x() const {return x;}
-coordinate_t state::get_y() const {return y;}
-Direction state::get_dir() const {return dir;}
+coordinate_t State::get_x() const {return x;}
+coordinate_t State::get_y() const {return y;}
+Direction State::get_dir() const {return dir;}
 
-void state::set_x(coordinate_t _x) {x = _x;}
-void state::set_y(coordinate_t _y) {y = _y;}
-void state::set_dir(Direction _dir) {dir = _dir;}
+void State::set_x(coordinate_t _x) {x = _x;}
+void State::set_y(coordinate_t _y) {y = _y;}
+void State::set_dir(Direction _dir) {dir = _dir;}
 
-void state::move_forward(coordinate_t dist) {
+void State::move_forward(coordinate_t dist) {
     if (dir > Direction::EAST)
         dist = -dist;
     if (dir == Direction::NORTH || dir == Direction::SOUTH)
@@ -25,7 +25,7 @@ void state::move_forward(coordinate_t dist) {
     else 
         add(y, dist);
 }
-void state::turn_right() {
+void State::turn_right() {
     switch (dir){
     case Direction::NORTH:
         dir = Direction::EAST;
@@ -42,7 +42,7 @@ void state::turn_right() {
     }
 }
 
-void state::turn_left() {
+void State::turn_left() {
     switch (dir){
     case Direction::NORTH:
         dir = Direction::WEST;
@@ -59,6 +59,6 @@ void state::turn_left() {
     }
 }
 
-std::ostream& operator<<(std::ostream& str, const state& state) {
+std::ostream& operator<<(std::ostream& str, const State& state) {
     return str << "(" << state.x << " " << state.y << ") " << state.dir;
 }

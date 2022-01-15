@@ -1,6 +1,6 @@
 #include "rover.h"
 
-RoverBuilder &RoverBuilder::program_command(char name, const Recipie &rec) {
+RoverBuilder &RoverBuilder::program_command(char name, const Recipe &rec) {
     r.insert({name, rec});
     return *this;
 }
@@ -35,7 +35,7 @@ void Rover::execute(const std::string &commands) {
 
 void Rover::land(std::pair<coordinate_t, coordinate_t> coords, Direction dir) {
     landed = true;
-    s = state(coords, dir);
+    s = State(coords, dir);
 }
 
 std::ostream &operator<<(std::ostream &os, const Rover &rover) {

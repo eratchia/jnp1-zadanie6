@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "initializer_list": "cpp",
+        "*.tcc": "cpp",
+        "optional": "cpp",
+        "functional": "cpp",
+        "random": "cpp",
+        "fstream": "cpp",
+        "future": "cpp",
+        "istream": "cpp",
+        "mutex": "cpp",
+        "ostream": "cpp",
+        "sstream": "cpp",
+        "stop_token": "cpp",
+        "streambuf": "cpp"
+    }
+}

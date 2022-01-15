@@ -14,13 +14,13 @@ public:
     OutOfBoundsException(): std::logic_error("TriedToRemoveStemVirus") {};
 };
 
-class state {
+class State {
 private:
     coordinate_t x;
     coordinate_t y;
     Direction dir;
 public:
-    state(std::pair<coordinate_t, coordinate_t> point, Direction _dir);
+    State(std::pair<coordinate_t, coordinate_t> point, Direction _dir);
 
     coordinate_t get_x() const;
     coordinate_t get_y() const;
@@ -31,5 +31,5 @@ public:
     void set_dir(Direction);
     void set_x(coordinate_t);
     void set_y(coordinate_t);
-    friend std::ostream& operator<<(std::ostream&, const state&);
+    friend std::ostream& operator<<(std::ostream&, const State&);
 };

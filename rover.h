@@ -18,7 +18,7 @@ class Rover {
 private:
     std::vector<std::unique_ptr<Sensor>> sensors;
     std::unordered_map<char, const Recipe &> recipies;
-    state s;
+    State s;
     bool landed, stopped;
     friend class RoverBuilder;
     Rover(std::vector<std::unique_ptr<Sensor>> &&sensors,
