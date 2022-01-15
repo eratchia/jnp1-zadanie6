@@ -3,6 +3,7 @@
 using std::initializer_list;
 using std::unique_ptr;
 using std::make_unique;
+using std::make_shared;
 
 // compose
 recipe_t compose(std::initializer_list<recipe_t> recipe) {
@@ -20,7 +21,7 @@ State MoveForward::next_state(const State& original) const {
     return next;
 }
 recipe_t move_forward() {
-    return {std::make_shared<MoveForward>()};
+    return {make_shared<MoveForward>()};
 }
 
 // MoveBackward
@@ -31,7 +32,7 @@ State MoveBackward::next_state(const State& original) const {
     return next;
 }
 recipe_t move_backward() {
-    return {std::make_shared<MoveBackward>()};
+    return {make_shared<MoveBackward>()};
 }
 
 // RotateLeft
@@ -42,7 +43,7 @@ State RotateLeft::next_state(const State& original) const {
     return next;
 }
 recipe_t rotate_left() {
-    return {std::make_shared<RotateLeft>()};
+    return {make_shared<RotateLeft>()};
 }
 
 // RotateRight
@@ -53,5 +54,5 @@ State RotateRight::next_state(const State& original) const {
     return next;
 }
 recipe_t rotate_right() {
-    return {std::make_shared<RotateRight>()};
+    return {make_shared<RotateRight>()};
 }

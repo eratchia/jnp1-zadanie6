@@ -24,8 +24,12 @@ public:
 
     coordinate_t get_x() const;
     coordinate_t get_y() const;
+    Direction get_dir() const;
     void move_forward(coordinate_t);
     void turn_right();
     void turn_left();
+    void set_dir(Direction);
+    void set_x(coordinate_t);
+    void set_y(coordinate_t);
     friend std::ostream& operator<<(std::ostream&, const State&);
 };
