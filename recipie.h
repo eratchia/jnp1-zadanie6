@@ -7,33 +7,34 @@
 #include <list>
 #include <memory>
 
-class executable {
+class Executable {
 public:
     virtual state next_state(const state&) const = 0;
 };
 
-class recipie {
+class Recipe {
 public:
-    using iterator = type_iterator<const executable>;
+    using iterator = TypeIterator<const Executable>;
     virtual iterator begin() const = 0;
     virtual iterator end() const = 0;
+    void simplify();
 };
 
-class instruction: public executable, public recipie {
+class Instruction: public Executable, public Recipe {
 private:
-    class instruction_iterator_impl : public iterator::implementation { 
+    class InstructionIteratorImpl : public iterator::implementation { 
     private:
         bool end;
-        const instruction* instr_ptr;
+        const Instruction* instr_ptr;
     public:
-        instruction_iterator_impl(const instruction*, bool) noexcept;
-        instruction_iterator_impl() = default; 
+        InstructionIteratorImpl(const Instruction*, bool) noexcept;
+        InstructionIteratorImpl() = default; 
 
         std::unique_ptr<iterator::implementation> clone() const noexcept override;
 
-        instruction_iterator_impl& operator++() noexcept override;
-        const instruction& operator*() const noexcept override;
-        const instruction* operator->() const noexcept override;
+        InstructionIteratorImpl& operator++() noexcept override;
+        const Instruction& operator*() const noexcept override;
+        const Instruction* operator->() const noexcept override;
         bool operator==(const iterator::implementation&) const noexcept override;
     };
 public:
@@ -42,54 +43,69 @@ public:
     iterator end() const override;
 };
 
-class compose: public recipie {
+class Compose: public Recipe {
 private:
-    using inner_structure = std::list<std::unique_ptr<const executable>>;
+    using inner_structure = std::list<std::unique_ptr<const Executable>>;
     using inner_iterator = inner_structure::const_iterator;
 
-    std::list<recipie> instructions;
+    inner_structure instructions;
 
-    class compose_iterator_impl : public iterator::implementation { 
+    class ComposeIteratorImpl : public iterator::implementation { 
     private:
         inner_iterator iter;
     public:
-        compose_iterator_impl(inner_iterator) noexcept;
-        compose_iterator_impl() = default; 
+        ComposeIteratorImpl(inner_iterator) noexcept;
+        ComposeIteratorImpl() = default; 
 
         std::unique_ptr<iterator::implementation> clone() const noexcept override;
 
-        virtual compose_iterator_impl& operator++() noexcept override;
-        virtual const executable& operator*() const noexcept override;
-        virtual const executable* operator->() const noexcept override;
+        virtual ComposeIteratorImpl& operator++() noexcept override;
+        virtual const Executable& operator*() const noexcept override;
+        virtual const Executable* operator->() const noexcept override;
         bool operator==(const iterator::implementation&) const noexcept override;
     };
 public:
 
-    compose(std::initializer_list<recipie>);
+    Compose() = delete;
+
     iterator begin() const override;
     iterator end() const override;
+    friend std::shared_ptr<Compose> compose(std::initializer_list<std::shared_ptr<Recipe>>);
 };
+std::shared_ptr<Compose> compose(std::initializer_list<std::shared_ptr<Recipe>>);
 
-class move_forward: public instruction {
+class MoveForward: public Instruction {
+private:
+    MoveForward();
 public:
-    move_forward();
     state next_state(const state&) const override;
+    friend std::shared_ptr<MoveForward> move_forward();
 };
+std::shared_ptr<MoveForward> move_forward();
 
-class move_backward: public instruction {
+class MoveBackward: public Instruction {
+private:
+    MoveBackward();
 public:
-    move_backward();
     state next_state(const state&) const override;
+    friend std::shared_ptr<MoveBackward> move_backward();
 };
+std::shared_ptr<MoveBackward> move_backward();
 
-class rotate_left: public instruction {
+class RotateLeft: public Instruction {
+private:
+    RotateLeft();
 public:
-    rotate_left();
     state next_state(const state&) const override;
+    friend std::shared_ptr<RotateLeft> rotate_left();
 };
+std::shared_ptr<RotateLeft> rotate_left();
 
-class rotate_right: public instruction {
+class RotateRight: public Instruction {
+private:
+    RotateRight();
 public:
-    rotate_right();
     state next_state(const state&) const override;
+    friend std::shared_ptr<Compose> rotate_right();
 };
+std::shared_ptr<Compose> rotate_right();

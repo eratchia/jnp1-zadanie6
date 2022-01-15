@@ -1,6 +1,6 @@
 #include "rover.h"
 
-RoverBuilder &RoverBuilder::program_command(char name, const recipie &rec) {
+RoverBuilder &RoverBuilder::program_command(char name, const Recipie &rec) {
     r.insert({name, rec});
     return *this;
 }
