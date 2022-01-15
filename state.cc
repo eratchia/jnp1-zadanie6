@@ -3,9 +3,10 @@ module;
 #include <stdexcept>
 #include <iostream>
 #include <limits>
-import Direction;
 
 export module State;
+
+export import Direction;
 
 export using coordinate_t = long long;
 export const coordinate_t MAX_COORDINATE_T = __LONG_LONG_MAX__;

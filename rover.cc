@@ -5,12 +5,11 @@ module;
 #include <utility>
 #include <string>
 #include <vector>
-import Sensor;
-import State;
-import Direction;
-import Instruction;
 
-export module Rover;
+export module rover;
+
+export import Sensor;
+export import Instruction;
 
 export class RoverDidNotLandYetException : public std::exception {
     const char *what() const noexcept override {

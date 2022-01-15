@@ -4,9 +4,10 @@ module;
 #include <vector>
 #include <list>
 #include <memory>
-import State;
 
 export module Instruction;
+
+export import State;
 
 using std::initializer_list;
 using std::unique_ptr;
