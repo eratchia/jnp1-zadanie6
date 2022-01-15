@@ -14,22 +14,27 @@ Rover RoverBuilder::build() {
     return {std::move(sensors), std::move(recipes)};
 }
 
+bool Rover::isInDanger() {
+    for (auto &sens : sensors)
+        if (!sens->is_safe(state.get_x(), state.get_y()))
+            return true;
+    return false;
+}
+
 void Rover::execute(const std::string &commands) {
     if (!landed)
         throw RoverDidNotLandYetException();
     stopped = true;
-    for (auto &sens : sensors)
-        if (!sens->is_safe(state.get_x(), state.get_y()))
-            return;
+    if (isInDanger())
+        return;
     for (char command : commands) {
         auto it = recipes.find(command);
         if (it == recipes.end())
             return;
         for (auto &exec : it->second) {
             state = exec->next_state(state);
-            for (auto &sens : sensors)
-                if (!sens->is_safe(state.get_x(), state.get_y()))
-                    return;
+            if (isInDanger())
+                return;
         }
     }
     stopped = false;
